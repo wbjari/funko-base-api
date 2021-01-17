@@ -1,4 +1,4 @@
-const Serie = require('../models').Serie;
+const Serie = require('../../models').Serie;
 
 module.exports = {
     create(req, res) {

@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'serieId',
         as: 'funkos',
       });
+      Serie.belongsTo(models.User,{
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      });
     };
   };
   Serie.init({
