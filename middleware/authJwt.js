@@ -1,10 +1,9 @@
 const jwt = require("jsonwebtoken");
-const authConfig = require("../utils/auth.config.json");
+const authConfig = require("../config/auth.config.json");
 const User = require("../models").user;
 
 verifyToken = (req, res, next) => {
-    let token = req.headers["x-access-token"];
-    console.log(token);
+    let token = req.headers['authorization'].split(' ')[1];
     if (!token) {
         return res.status(403).send({
             message: "No token provided!"

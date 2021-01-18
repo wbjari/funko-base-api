@@ -9,7 +9,7 @@ const cors = require('cors');
 const httpStatus = require('http-status');
 const expressValidation = require('express-validation');
 const routes = require('../api/routes/index.route');
-const dbConfig = require('./db.config');
+const dbConfig = require('../config/config');
 const APIError = require('./helpers/APIError');
 
 const app = express();
@@ -22,7 +22,7 @@ var corsOptions = {
     origin: "http://localhost:8081"
 }
 
-// parse body params and attache them to req.body
+// parse body params and attach them to req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

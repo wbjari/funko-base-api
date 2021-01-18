@@ -1,6 +1,6 @@
 const express = require('express');
 const expressJwt = require('express-jwt');
-const authConfig = require('../../utils/auth.config');
+const authConfig = require('../../config/auth.config');
 const serieController = require('../controllers').serie;
 const { authJwt } = require("../../middleware");
 

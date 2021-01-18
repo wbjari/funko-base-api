@@ -1,6 +1,6 @@
 const express = require('express');
 const expressJwt = require('express-jwt');
-const authConfig = require('../../utils/auth.config');
+const authConfig = require('../../config/auth.config');
 const funkoController = require('../controllers').funko;
 const { authJwt } = require("../../middleware"); 
 
@@ -10,23 +10,23 @@ const jwt = expressJwt({ secret: authConfig.secret, algorithms: ['HS256'] })
 
 router.route('/')
     /** GET /api/funko - Get all funkos */
-    // .get(funkoController.getAll)
+    .get(funkoController.getAll)
 
     /** POST /api/funko - Create new funko */
-    .post(jwt, funkoController.create);
+    .post([authJwt.verifyToken], funkoController.create);
 
-// router.route('/:funkoId')
+router.route('/:funkoId')
     /** GET /api/funko/:funkoId - Get funko */
-    // .get(funkoController.get)
+    .get(funkoController.get)
 
     /** PUT /api/funko/:funkoId - Update funko */
-    // .put(expressJwt({ secret: authConfig.secret }), funkoController.update)
+    .put([authJwt.verifyToken], funkoController.update)
 
     /** DELETE /api/funko/:funkoId - Delete funko */
-    // .delete(expressJwt({ secret: authConfig.secret }), funkoController.remove);
+    .delete([authJwt.verifyToken], funkoController.remove);
 
 /** Load funko when API with funkoId route parameter is hit */
-// router.param('funkoId', funkoController.load);
+router.param('funkoId', funkoController.load);
 
 module.exports = router;
 

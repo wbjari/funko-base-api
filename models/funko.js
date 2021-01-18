@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     };
   };
   Funko.init({
+    id: {
+      allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -32,6 +38,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING
+    }, 
+    serieId: {
+      type: DataTypes.INTEGER
+    },
+    userId: {
+      type: DataTypes.INTEGER
     }
   }, {
     sequelize,
