@@ -1,4 +1,5 @@
 const Serie = require('../../models').Serie;
+const Funko = require('../../models').Funko;
 const httpStatus = require('http-status');
 
 exports.load = (req, res, next, id) => {
@@ -11,30 +12,32 @@ exports.load = (req, res, next, id) => {
         .catch(error => res.status(httpStatus.BAD_GATEWAY).send(error))
 }
 
-// exports.update = (req, res) => {
-//     return Serie.update({
-//         name: req.body.name
-//     }, {
-//         where: { id: this.id, userId: req.userId }
-//     })
-//         .then(serie => res.status(httpStatus.OK).send(serie))
-//         .catch(error => res.status(httpStatus.BAD_GATEWAY).send(error));
-// }
+exports.update = (req, res) => {
+    return Serie.update({
+        name: req.body.name
+    }, {
+        where: { id: this.id, userId: req.userId }
+    })
+        .then(serie => res.status(httpStatus.OK).send(serie))
+        .catch(error => res.status(httpStatus.BAD_GATEWAY).send(error));
+}
 
 exports.remove = (req, res) => {
-    return Serie.destroy({
+    Funko.destroy({
         where: {
-            id: this.id
+            serieId: this.id
         }
-    })
-        .then((result) => {
-            if (result == 1) {
-                res.send(true);
-            } else {
-                res.send(false);
-            }
-        });
-}
+        }).then((result) => {
+            Serie.destroy({
+                where: {
+                    id: this.id,
+                    userId: req.userId
+                }
+            }).then(es.status(200).send((results[0].id).toString()))   
+            .catch(error => res.status(httpStatus.BAD_GATEWAY).send(error)); 
+        }).catch(error => res.status(httpStatus.BAD_GATEWAY).send(error)); 
+
+};
 
 exports.get = (req, res) => {
     if (req.serie === null) {

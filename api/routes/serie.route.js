@@ -20,13 +20,13 @@ router.route('/byUser')
 
 router.route('/:serieId')
     /** GET /api/serie/:serieId - Get serie */
-    // .get(serieController.get)
+    .get(serieController.get)
 
-    // /** PUT /api/serie/:serieId - Update serie */
-    // .put([authJwt.verifyToken], serieController.update)
+    /** PUT /api/serie/:serieId - Update serie */
+    .put([authJwt.verifyToken], serieController.update)
 
-    // /** DELETE /api/serie/:serieId - Delete serie */
-    // .delete([authJwt.verifyToken], serieController.remove);
+    /** DELETE /api/serie/:serieId - Delete serie */
+    .delete([authJwt.verifyToken], serieController.remove);
 
 /** Load serie when API with serieId route parameter is hit */
 router.param('serieId', serieController.load);
