@@ -1,9 +1,14 @@
 const Funko = require('../../models').Funko;
+const Serie = require('../../models').Serie;
+const Like = require('../../models').Like;
+const User = require('../../models').User;
 const httpStatus = require('http-status');
 
 exports.load = (req, res, next, id) => {
     this.id = id;
-    return Funko.findByPk(id)
+    return Funko.findOne({
+        where: {id: this.id}
+    })
         .then((funko) => {
             req.funko = funko;
             return next();
@@ -12,13 +17,13 @@ exports.load = (req, res, next, id) => {
 }
 
 exports.update = (req, res) => {
-    console.log(this.id);
     return Funko.update({
         name: req.body.name,
         number: req.body.number,
-        description: req.body.description
+        description: req.body.description,
+        serieId: req.body.serieId
     }, {
-        where: {id: this.id}
+        where: {id: this.id, userId: req.userId}
     })
     .then(funko => res.status(httpStatus.OK).send(funko))
     .catch(error => res.status(httpStatus.BAD_GATEWAY).send(error));
@@ -52,14 +57,21 @@ exports.create = (req, res) => {
         name: req.body.name,
         number: req.body.number,
         description: req.body.description,
-        userId: req.userId
+        userId: req.userId,
+        serieId: req.body.serieId
     })
     .then(funko => res.status(httpStatus.OK).send(funko))
     .catch(error => res.status(httpStatus.BAD_GATEWAY).send(error));
 }
 
 exports.getAll = (req, res) => {
-    return Funko.findAll({})
+    return Funko.findAll({
+        include: { all: true, nested: true },
+        order: [
+            ['serieId', 'ASC'],
+            ['number', 'ASC']
+        ]
+    })
         .then(result => res.status(httpStatus.OK).send(result))
         .catch(error => res.status(httpStatus.BAD_GATEWAY).send(error));
 }

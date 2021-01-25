@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       });
+      Funko.hasMany(models.Like, {
+        foreignKey: 'funkoId',
+        as: 'likes',
+      });
     };
   };
   Funko.init({
@@ -38,12 +42,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING
-    }, 
-    serieId: {
-      type: DataTypes.INTEGER
-    },
-    userId: {
-      type: DataTypes.INTEGER
     }
   }, {
     sequelize,

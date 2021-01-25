@@ -5,6 +5,7 @@ const authRoutes = require ('./auth.route');
 const userRoutes = require ('./user.route');
 const serieRoutes = require ('./serie.route');
 const funkoRoutes = require ('./funko.route');
+const likeRoutes = require ('./like.route');
 
 const router = express.Router();
 
@@ -23,5 +24,8 @@ router.use('/serie', serieRoutes);
 
 // mount funko routes at /funko
 router.use('/funko', funkoRoutes);
+
+// mount like routes at /like
+router.use('/like', likeRoutes);
 
 module.exports = router;

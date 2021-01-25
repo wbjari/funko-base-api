@@ -20,7 +20,7 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn(
       'Funkos', // name of Source model
-      'CustomerId' // key we want to remove
+      'serieId' // key we want to remove
     );
   }
 };
