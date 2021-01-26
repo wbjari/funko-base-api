@@ -42,7 +42,7 @@ exports.create = (req, res) => {
                 .then(like => res.status(httpStatus.OK).send(like))
                 .catch(error => res.status(httpStatus.BAD_GATEWAY).send(error));
         } else {
-            res.status(httpStatus.ALREADY_REPORTED).send(error);
+            res.status(httpStatus.ALREADY_REPORTED).send(false);
         }
     })
     
