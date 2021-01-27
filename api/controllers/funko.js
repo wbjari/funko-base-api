@@ -66,7 +66,7 @@ exports.create = (req, res) => {
 
 exports.getAll = (req, res) => {
     return Funko.findAll({
-        include: { all: true, nested: true },
+        include: { all: true, nested: true, attributes: { exclude: ['password'] } },
         order: [
             ['serieId', 'ASC'],
             ['number', 'ASC']
